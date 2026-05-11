@@ -8,7 +8,7 @@ def swashdict(path_sc=""):
     Return dictionaries with SWASH output metadata from source code.
 
     Args:
-        path_sc (str, optional): path of SWASH source code if using developer mode (otherwise it parses SWASH 9.01 online version). Defaults to "".
+        path_sc (str, optional): path of SWASH source code if using developer mode (otherwise it parses SWASH 12.01 online version). Defaults to "".
     
     Returns:
         swash_dict (dict): dictionary with SWASH output metadata (keyword, name, and units; read from SwashInit.ftn90).
@@ -40,10 +40,10 @@ def swashdict(path_sc=""):
         import tarfile
         from io import BytesIO
         tmpfile = BytesIO()
-        tmpfile.write(urllib.request.urlopen("https://swash.sourceforge.io/download/zip/swash-9.01.tar.gz").read())
+        tmpfile.write(urllib.request.urlopen("https://swash.sourceforge.io/download/zip/swash-12.01.tar.gz").read())
         tmpfile.seek(0)
         tfile = tarfile.open(fileobj=tmpfile, mode="r:gz")
-        init=tfile.extractfile('swash-9.01/SwashInit.ftn90').readlines()
+        init=tfile.extractfile('swash-12.01/SwashInit.ftn90').readlines()
         tmpfile.close()
         tfile.close()
         init=[i.decode('UTF-8') for i in init]
@@ -77,7 +77,7 @@ def swashdict(path_sc=""):
                }    
 
     # dict with ivtype (SWASH source code number for each keyword output) to type (sta or ins; no_grid, 2D, ke, or kc)
-    # based on swash-9.01_further - https://github.com/rfonsecadasilva/swash-9.01_further
+    # based on swash-12.01_further - https://github.com/rfonsecadasilva/swash-12.01_further
     # sta is static; ins is instantaneous; no_grid means constant output variables; 2D is twodimensional variable; ke is 3D defined at vertical cell edge, whereas kc is at cell center)
     out_ind={}
     out_ind["no_grid"]=[40,41] + list(range(101,116)) # no grid instantaneous
@@ -193,7 +193,7 @@ def mat2nc(path_run,path_sc="",run_file="run.sws",save_nc=False):
 
     Args:
         path_run (str): path where run file (*.sws) is located.
-        path_sc (str, optional): path of SWASH source code if using developer mode (otherwise it parses SWASH 9.01 online version). Defaults to "".
+        path_sc (str, optional): path of SWASH source code if using developer mode (otherwise it parses SWASH 12.01 online version). Defaults to "".
         run_file (str, optional): run file name. Defaults to "run.sws".
         save_nc (bool, optional): option to save each nc file. Defaults to True.
     
@@ -314,7 +314,7 @@ def tab2nc(path_run,path_sc="",run_file="run.sws",save_nc=False):
 
     Args:
         path_run (str): path where run file (*.sws) is located.
-        path_sc (str, optional): path of SWASH source code if using developer mode (otherwise it parses SWASH 9.01 online version). Defaults to "".
+        path_sc (str, optional): path of SWASH source code if using developer mode (otherwise it parses SWASH 12.01 online version). Defaults to "".
         run_file (str, optional): run file name. Defaults to "run.sws".
         save_nc (bool, optional): option to save each nc file. Defaults to True.
     
